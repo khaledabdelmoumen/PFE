@@ -1,0 +1,974 @@
+<section class="bg-white">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <!-- ##################### Slider Starts Here #################### -->
+
+  <div>
+    <section class="details">
+    
+      <h3>Checkout</h3>
+      <br>
+
+      <table>
+        <thead>
+          <tr>
+            <th class="thtext">Product</th>
+            <th class="thtext">Price</th>
+            <th class="thtext" >Quantity</th>
+            <th class="thtext" >Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let produit of produits; let i = index">
+            <td class="product">
+              <div class="product-item">
+                <div class="product-icon" (click)="deleteProduct(i)"><i class="far fa-times-circle icone"></i></div>
+                <img src="assets/images/product/waterPurifierFilter.png" alt="Image produit">
+                <span class="productName">{{ productName }}</span>
+              </div>
+            </td>
+            <td class="price">{{ productPrice }} $</td>
+            <td class="quantity">
+              <div class="quantity-box">
+                <div class="quantity-controls">
+                  <button class="quantity-decrease" (click)="decreaseQuantity()"
+                    [class.clicked]="buttonDecreaseClicked">-</button>
+                  <input type="number" id="quantity" name="quantity" [(ngModel)]="quantity"
+                    (ngModelChange)="updateTotal()" min="1">
+                  <button class="quantity-increase" (click)="increaseQuantity()"
+                    [class.clicked]="buttonIncreaseClicked">+</button>
+                </div>
+
+              </div>
+            </td>
+            <td class="subtotal">{{ subTotal }} $</td>
+          </tr>
+
+          <tr>
+            <td colspan="4">
+              <div class="additional-row">
+                <input type="text" placeholder="Coupon Code" class="coupon-input">
+                <button class="coupon-button">Apply Coupon</button>
+              </div>
+            </td>
+          </tr>
+          <!-- Ajoutez plus de lignes pour chaque produit du panier -->
+        </tbody>
+      </table>
+      <div class="container">
+        <div class="billing">
+          <h3>Billing details
+            <hr>
+          </h3>
+
+          <form class="form" #billingForm="ngForm">
+
+
+            <div class="form-group">
+              <div class="name-fields">
+                <div class="form-field first-name">
+                  <label for="first-name">First name <span class="redstar">*</span></label>
+                  <input type="text" id="first-name"    name="name" ngModel required>
+                </div>
+
+                <div class="form-field last-name">
+                  <label for="last-name">Last name <span class="redstar">*</span></label>
+                  <input type="text" id="last-name" ngModel name="lastname" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="company-name">Company name (optional)</label>
+              <input type="text" id="company-name" ngModel name="companyname">
+            </div>
+
+            <div class="form-group">
+              <label for="country">Country / Region <span class="redstar">*</span></label>
+              <select id="country" name="country"  ngModel>
+                <option value="">Select Country</option>
+
+                <!-- Ajoutez d'autres options pour différents pays -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="street-address">Street address <span class="redstar">*</span></label>
+              <input type="text" id="street-address" name="street-address" placeholder="House number and street name"
+                required ngModel ><br>
+              <input type="text" id="house-number" name="house-number"
+                placeholder="Apartment, suite, unit, etc. (optional)" style="margin-top: 10px;">
+            </div>
+
+
+
+
+            <div class="form-group">
+              <label for="town-city">Town / City <span class="redstar">*</span></label>
+              <input type="text" id="town-city" name="town-city" ngModel >
+            </div>
+
+            <div class="form-group">
+              <label for="state">State <span class="redstar">*</span></label>
+              <select id="country" name="country" ngModel >
+                <option value="">Select Country</option>
+
+                <!-- Ajoutez d'autres options pour différents pays -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="zip-code">ZIP Code <span class="redstar">*</span></label>
+              <input type="text" id="zip-code" name="zip-code" ngModel required>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone <span class="redstar">*</span></label>
+              <input type="text" id="phone" name="phone" ngModel required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email address <span class="redstar">*</span></label>
+              <input type="email" id="email" name="email" ngModel required>
+            </div>
+
+            <div class="form-group checkbox">
+
+              <input type="checkbox" id="create-account" name="create-account">
+              <label for="create-account">Create an account?</label>
+            </div>
+            <div class="form-group checkbox">
+
+              <input type="checkbox" id="unsubscrive-newsletters" name="unsubscrive-newsletters">
+              <label for="unsubscrive-newsletters">Unsubscribe from newsletters</label>
+            </div>
+
+            <div class="form-group checkbox">
+              <input type="checkbox" id="ship-to-different-address" name="ship-to-different-address"
+                [(ngModel)]="isShipToDifferentAddress" (change)="onCheckboxChange()">
+              <label for="ship-to-different-address">Ship to a different address?</label>
+            </div>
+            <hr class="formShippinghr">
+            <div class="formShipping" *ngIf="isShipToDifferentAddress">
+
+
+              <form class="form">
+
+
+                <div class="form-group">
+                  <div class="name-fields">
+                    <div class="form-field first-name">
+                      <label for="first-name">First name <span class="redstar">*</span></label>
+                      <input type="text" id="first-name" name="first-name" required>
+                    </div>
+
+                    <div class="form-field last-name">
+                      <label for="last-name">Last name <span class="redstar">*</span></label>
+                      <input type="text" id="last-name" name="last-name" required>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="form-group">
+                  <label for="company-name">Company name (optional)</label>
+                  <input type="text" id="company-name" name="company-name">
+                </div>
+
+                <div class="form-group">
+                  <label for="country">Country / Region <span class="redstar">*</span></label>
+                  <select id="country" name="country" required>
+                    <option value="">Select Country</option>
+
+                    <!-- Ajoutez d'autres options pour différents pays -->
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="street-address">Street address <span class="redstar">*</span></label>
+                  <input type="text" id="street-address" name="street-address"
+                    placeholder="House number and street name" required><br>
+                  <input type="text" id="house-number" name="house-number"
+                    placeholder="Apartment, suite, unit, etc. (optional)" style="margin-top: 10px;">
+                </div>
+
+
+
+
+                <div class="form-group">
+                  <label for="town-city">Town / City <span class="redstar">*</span></label>
+                  <input type="text" id="town-city" name="town-city" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="state">State <span class="redstar">*</span></label>
+                  <select id="state" name="state" required>
+                    <option value="">Select Country</option>
+
+                    <!-- Ajoutez d'autres options pour différents pays -->
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="zip-code">ZIP Code <span class="redstar">*</span></label>
+                  <input type="text" id="zip-code" name="zip-code" required>
+                </div>
+
+
+
+
+              </form>
+
+            </div>
+
+            <div class="form-group">
+              <label for="order-notes">Order notes (optional)</label>
+              <textarea id="order-notes" name="order-notes"
+                placeholder="Notes about your order, e.g. sepcial notes for delivery"></textarea>
+            </div>
+
+
+          </form>
+        </div>
+        <div class="payment">
+          <div class="order-summary">
+            <span class="order">Your order</span>
+            <div class="product-details">
+              <div class="productcard">
+                <span style="font-weight: bold;">Product</span>
+                <span style="font-weight: bold;">Subtotal</span>
+              </div>
+              <div class="productcard">
+                <span class="product-name">{{productName}}</span>
+                <span class="product-quantity">× {{quantity}} </span>
+              </div>
+              <div class="subtotalcard">
+                <span class="subtotal-label">Subtotal</span>
+                <span class="subtotal-value">$ {{subTotal}}</span>
+              </div>
+              <div class="shippingcard">
+                <span class="shipping-label">Shipping</span>
+                <span class="shipping-value">Worldwide Free Shipping</span>
+              </div>
+              <div class="totalcard">
+                <span class="total-label">Total</span>
+                <span class="total-value">$ {{total}}</span>
+              </div>
+            </div>
+            <div class="payment-method">
+
+              <form [formGroup]="paymentForm" class="paymentFormStyle">
+
+
+              
+
+                <div class="payment-option">
+                  <div class="radio-container">
+                    <input type="radio" id="cash-radio" formControlName="paymentMethod" value="cash"
+                      (click)="onPaymentMethodcash()" >
+                    <div class="radio-custom"></div>
+                  </div>
+                  <label class="cash" for="cash-radio" [class.label-selected]="paymentForm.value.paymentMethod === 'cash'">Cash
+                    on delivery (Only in tunisia)
+                  </label>
+                </div>
+                <div class="line" [ngClass]="{ }"></div>
+                <div class="payment-option">
+                  <div class="radio-container">
+                    <input type="radio" id="paypal-radio" formControlName="paymentMethod" value="paypal"
+                      (click)="onPaymentMethodPaypal()">
+                    <div class="radio-custom"></div>
+                  </div>
+                  <label for="paypal-radio" [class.label-selected]="paymentForm.value.paymentMethod === 'paypal'">PayPal
+                    <img class="paypalimg" src="assets/payment/paypal_logo.png" alt="PayPal Logo">
+                  </label>
+                </div>
+
+                <div class="line" [ngClass]="{  }"></div>
+
+                <div class="payment-option">
+                  <div class="radio-container radioCards"
+                    [class.radio-selected]="paymentForm.value.paymentMethod === 'credit-card'">
+                    <input type="radio" id="credit-card-radio" formControlName="paymentMethod" value="credit-card"
+                      (click)="onPaymentMethodChange()"  >
+                    <div class="radio-custom"></div>
+                  </div>
+
+                  <div class="label-container"
+                    [class.label-selected]="paymentForm.value.paymentMethod === 'credit-card'">
+                    <label for="credit-card-radio">Credit Card Payment</label>
+                  </div><br>
+                  <div class="credit-card-logos-container"
+                    [ngClass]="{ 'expanded': paymentForm.value.paymentMethod === 'credit-card' }">
+                    <div class="credit-card-logos">
+                      <div class="credit-card-logo">
+                        <img src="assets/images/payment/visa_logo.png" alt="Visa Logo">
+                      </div>
+                      <div class="credit-card-logo">
+                        <img src="assets/images/payment/discover_logo.png" alt="Discover Logo">
+                      </div>
+                      <div class="credit-card-logo">
+                        <img src="assets/images/payment/mastercard_logo.png" alt="Mastercard Logo">
+                      </div>
+                      <div class="credit-card-logo">
+                        <img src="assets/images/payment/visa_logo2.png" alt="Visa Logo">
+                      </div>
+                      <!-- Ajoutez les autres logos de cartes de crédit ici -->
+                    </div>
+                  </div>
+                </div>
+
+                
+
+
+
+
+              </form>
+
+
+
+
+
+
+            </div>
+
+
+            <div class="terms-conditions">
+              <p>Your personal data will be used to process your order, support your experience throughout this website,
+                and for other purposes described in our privacy policy.</p>
+              <input type="checkbox" id="terms-checkbox" class="termscheckbox">
+              <label for="terms-checkbox" class="terms-checkboxlabel"> I have read and agree to the website terms and
+                conditions</label>
+            </div>
+            <div class="button-container">
+              <button class="buttonPaypal" *ngIf="paymentForm.value.paymentMethod == 'paypal'">
+              </button>
+
+             
+                <!-- Button trigger modal -->
+<button type="button" [disabled]="!billingForm.form.valid" class="buttoncreditCard" *ngIf="paymentForm.value.paymentMethod === 'credit-card'"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Place order 
+</button>
+
+
+              <button class="buttoncreditCard" *ngIf="paymentForm.value.paymentMethod === 'cash'">Place order</button>
+              <div class="error-message" *ngIf="!billingForm.form.valid">Veuillez remplir tous les champs</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+    </section>
+
+
+
+  </div>
+
+  <!--- ############ Footer Starts Here ################## -->
+                <!-- Modal -->
+                <div class="modal xl fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5 " id="exampleModalLabel">Provide further information</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <!--modal body -->
+                        
+            <div class="col">
+    
+              <div class="left border">
+                  <div class="row">
+                      <span class="header">Payment</span>
+                      <div class="icons">
+                          <img src="https://img.icons8.com/color/48/000000/visa.png"/>
+                          <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png"/>
+                          <img src="https://img.icons8.com/color/48/000000/maestro.png"/>
+                      </div>
+                    </div>
+                  <form>
+                      <span>Cardholder's name:</span>
+                      <input class="inputx" placeholder="Linda Williams">
+                      <span>Card Number:</span>
+                      <input class="inputx" [(ngModel)]="cardNumber" name="cardNumber" placeholder="0125 6780 4567 9909">
+                      <div class="row">
+                          <div class="col-4"><span>Expiry Month:</span>
+                              <input class="inputx"placeholder="MM" [(ngModel)]="expMonth"name="expMonth" >
+                          </div>
+                          <div class="col-4"><span>Expiry Month:</span>
+                            <input class="inputx" placeholder="YY" [(ngModel)]="expYear"name="expYear" >
+                        </div>
+                        <div class="col-4"><span>CVV:</span>
+                          <input class="inputx" id="cvv" [(ngModel)]="cvc" name="cvc">
+                      </div>
+                      </div>
+                      
+                      <input type="checkbox" id="save_card" class="align-left">
+                      <label for="save_card">Save card details to wallet</label>  
+                  </form>
+              </div>                        
+        
+            </div>
+                      </div>
+                      <div class="modal-footer">
+                        
+                        <button type="button" (click)="chargeCreditCard()" class="btn btn-primary btnpay">Pay Now</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--end-->
+
+
+
+</section>
+<script>
+
+
+
+</script>
+<style>
+  .payment {
+    flex: 1;
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .checkbox label {
+    margin-left: 10px;
+  }
+
+
+  .order-summary {
+    max-width: 1000px;
+    margin: 10px -80px auto 20px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+
+  .product-details {
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+
+  .productcard {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+
+  .subtotalcard,
+  .shippingcard,
+  .totalcard {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 10px;
+  }
+
+  .payment-method {
+    margin-bottom: 20px;
+  }
+
+  .payment-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .payment-option label {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+
+
+
+  .paypalimg {
+    margin-left: 220%;
+    width: 100px;
+    /* Modifier la largeur souhaitée */
+    height: auto;
+    /* Permet de conserver les proportions originales de l'image */
+  }
+
+  .line {
+    height: 23px;
+    width: 127%;
+    background-color: #f0efef;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .creditCards {
+    display: flex;
+    flex-direction: row;
+  }
+
+
+  .label-container.label-selected {
+    position: relative;
+    top: -0px;
+    margin-bottom: 120px;
+  }
+
+  .radio-container.radio-selected input[type="radio"] {
+    position: relative;
+    margin-bottom: 120px;
+  }
+
+
+
+  .credit-card-logos {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-left: -150px;
+    background-color: rgb(243, 240, 240);
+
+  }
+
+  .credit-card-logos img {
+    width: 70px;
+    margin-right: 10px;
+  }
+
+
+  .terms-conditions {
+    margin-bottom: 20px;
+  }
+
+  .terms-conditions label {
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .button-container {
+    text-align: center;
+  }
+
+  .buttonPaypal {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 20px 10px 10px;
+    background-color: #f7d437;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 40px;
+    background-image: url("../../assets/images/payment/paypal_logobutton.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+
+  .buttonPaypal-text {
+    display: none;
+  }
+
+
+  .buttoncreditCard {
+    display: inline-block;
+    padding: 10px 20px;
+    width: 100%;
+    background-color: #3486ca;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+
+  .terms-checkboxlabel {
+    margin-left: 10px;
+  }
+
+  .paymentFormStyle {
+    margin-left: -0px;
+  }
+
+  /* glissement*/
+
+  .line {
+    height: 1px;
+    background-color: #ccc;
+    overflow: hidden;
+    transition: height 0.3s ease-out;
+  }
+
+  .line.expanded {
+    height: 10px;
+    /* Ajustez la hauteur souhaitée */
+  }
+
+  .label-container {
+    white-space: nowrap;
+  }
+
+  .credit-card-logos-container {
+    width: 100%;
+    margin-bottom: -20px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
+  .credit-card-logos-container.expanded {
+    max-height: 5000px;
+    /* Ajustez la hauteur souhaitée */
+    opacity: 1;
+  }
+
+  @media screen and (max-width: 768px) {
+
+
+    .details {
+      padding: 150px 110px 120px 10px;
+      background-color: rgb(252, 252, 252);
+    }
+
+    .details h3 {
+      margin-left: 15px;
+      margin-bottom: -10px;
+      font-weight: bold;
+    }
+
+    table {
+      margin-left: 10px;
+      margin-right: 10px;
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+      border: 1px solid #ccc;
+    }
+
+
+    td.product img {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+      margin-left: 10px;
+      object-fit: cover;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    td.price,
+    td.subtotal {
+      text-align: left;
+    }
+
+    /* Style des en-têtes de colonnes */
+    th {
+      font-weight: bold;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-size: 16.5px;
+      color: #333;
+    }
+
+    .additional-row input {
+      width: 120px;
+    }
+
+
+    .quantity-box label {
+      font-weight: bold;
+      font-size: 14px;
+      margin-right: 10px;
+    }
+
+    .quantity-controls button {
+      width: 25px;
+      background-color: #ffffff;
+      border: rgb(189, 188, 188) solid 1px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+
+
+    .quantity-controls input {
+      background-color: #ffffff;
+      border: rgb(189, 188, 188) solid 1px;
+      width: 40px;
+      padding: 5px;
+      font-size: 12px;
+    }
+
+    .quantity-box input {
+      background-color: #ffffff;
+      border: rgb(189, 188, 188) solid 1px;
+      width: 60px;
+      padding: 5px;
+      margin-left: 10px;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .quantity-decrease {
+      margin-right: -10px;
+    }
+
+
+    .formShippinghr {
+      width: 300px;
+    }
+
+    .formShipping {
+      width: 200px;
+      margin-left: -8px;
+    }
+
+
+
+    form {
+      width: 150%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .order {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: bold;
+      font-size: 16px;
+      color: rgb(63, 62, 62);
+    }
+
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 1px;
+      font-size: 12px;
+    }
+
+    hr {
+      width: 100%;
+    }
+
+    textarea {
+      height: 40px;
+    }
+
+    button[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    .form-container {
+      text-align: left;
+    }
+
+    .name-fields {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .last-name {
+      margin-top: 10px;
+      margin-left: -1%;
+    }
+
+    .name-fields input[type="text"] {
+      width: 100%;
+    }
+
+    .form {
+      margin-left: 10px;
+      margin-top: 15px;
+    }
+
+    .icon {
+      position: absolute;
+      margin-top: 24px;
+      font-size: 14px;
+      color: rgb(163, 162, 162);
+    }
+
+    .icon:hover {
+      color: #504f4f;
+      cursor: pointer;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .billing {
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+
+    .payment {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .checkbox label {
+      margin-left: 5px;
+    }
+
+
+
+
+    .order-summary {
+      max-width: 1000px;
+      margin: 10px -80px auto 10px;
+      padding: 20px;
+      border-radius: 5px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-details {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .productcard {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 5px;
+      margin-bottom: 5px;
+    }
+
+    .subtotalcard,
+    .shippingcard,
+    .totalcard {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 5px;
+    }
+
+    .payment-method {
+      margin-bottom: 10px;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .payment-option label {
+      display: flex;
+      align-items: center;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+
+    .paypalimg {
+      margin-left: 118%;
+      width: 70px;
+      height: auto;
+    }
+
+    .line {
+      width: 270px;
+      height: 5px;
+      background-color: #f0efef;
+      border: none;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .credit-card-logos {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      margin-left: -140px;
+      background-color: rgb(243, 240, 240);
+    }
+
+    .credit-card-logos img {
+      width: 50px;
+      margin-right: 5px;
+    }
+
+    .terms-conditions {
+      margin-bottom: 10px;
+    }
+
+    .terms-conditions label {
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    .paymentFormStyle {
+      margin-left: -5px;
+    }
+
+
+  }
+</style>

@@ -1,0 +1,97 @@
+
+<!--<section class="forms">
+    <div class="form login">
+        <h2>Login</h2>
+        <form action="">
+            <div class="field input-fiels">
+                <input type="email" placeholder="Email" class="input">
+            </div>
+            <div class="field input-fiels">
+                <input type="password" placeholder="Password" class="password">
+                <i class="bi bi-eye-slash eye-icon"></i>
+            </div>
+            <div class="form-link">
+                <a href="" class="forgot-pass">Forgot password?</a>
+            </div>
+            <div class="field button-field">
+                <button>Login</button>
+            </div>
+        
+        </form>
+        <div class="form-link">
+            <span>Already have an account? <a class="signup-link">Signup</a></span>
+        </div>
+        <div class="line"></div>
+        <div class="media-options">
+            <a href="" class="field facebbok ">
+                <div class="div-media">
+               <i class="bi bi-facebook facebook-icon"></i> 
+             
+                <span>Login With Facebook</span>
+            </div>
+            </a>
+            <a href="" class="field google ">
+        
+             <div class="div-media">
+               <i class="bi bi-google google-icon"></i>
+                <span>Login With google</span>
+            </div>
+            </a>
+            <a href="" class="field apple ">
+              
+                <div class="div-media">
+                   <i class="bi bi-apple apple-icon"></i>
+                   <span>Login With Apple</span>
+               </div>
+               </a>
+            
+        </div>
+
+    </div>
+</section>
+-->
+<section>
+    <div  class="container-lg content">
+    <div class="login">
+        <h2>Login</h2>
+        <form class="login-form">
+            <div class="field input-fiels">
+                <label for="">Username or email address<span class="star">*</span></label>
+                <input type="email" placeholder="Email" class="input">
+            </div>
+            <div class="field input-fiels">
+                <label for="">Password<span class="star">*</span></label>
+                <div class="pwd-div">
+                    <input [type]="type"  placeholder="Password" class="password">
+                    <i  class="bi {{ eyeIcon }}"   id="togglePassword"  (click)="hideShowPass()"></i>
+                </div>
+            </div>
+            <div>
+                <input type="checkbox" name="rememberMe" value="rememberMe" style="margin-right: 2px;">
+                <label for="rememberMe"> Remember me</label><br>
+            </div>
+            <div class="field">
+                <button class="button-field" style="background-color: #1690F0; color:#fff; margin-top:20px">Login</button>
+            </div>
+            <div class="form-link">
+                <a href="" class="forgot-pass" style="color: #1690F0;">Lost Your password?</a>
+            </div>
+        </form>
+    </div>
+    <div class="register">
+        <h2>Register</h2>
+        <form class="register-form">
+        <div class="field input-fiels">
+            <label for="">Email address<span class="star">*</span></label>
+            <input type="email" placeholder="Email" class="input">
+        </div>
+        <p style="margin-bottom: 20px;">A link to set a new password will be sent to your email address.</p>
+        <p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <span style="color:#1690F0; cursor:pointer;">privacy policy</span>.</p>
+        <div class="field">
+            <button class="button-field" style="background-color: #1690F0; color:#fff; margin-top:20px">Register</button>
+    
+        </div>    
+    </form>
+    </div>
+</div>
+</section>

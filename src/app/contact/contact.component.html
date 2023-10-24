@@ -1,0 +1,79 @@
+
+  
+      
+    <!--  ************************* Page Title Starts Here ************************** -->
+    
+  <!-- ##################### Our Products Starts Here #################### -->
+     
+  <section class="bg-white">
+    <div class="container-lg">
+         <div class="row">
+
+
+          <div class="col-sm-7">
+            <div class="div-title">
+              <h2>Contact Form</h2>
+          </div>
+          <form [formGroup]="ContactForm" (ngSubmit)="onSubmit()">
+              <div class="row cont-row field">
+                  <div  class="col-sm-3"><label>Enter Name </label><span>:</span></div>
+                  <div class="col-sm-8"><input type="text" placeholder="Enter Name" name="name" formControlName="name" class="form-control input-sm"  ></div>
+              </div>
+              <div  class="row cont-row field">
+                  <div  class="col-sm-3"><label>Email Address </label><span>:</span></div>
+                  <div class="col-sm-8"><input type="text" name="name" placeholder="Enter Email Address" formControlName="email" class="form-control input-sm"  ></div>
+              </div>
+               <div  class="row cont-row field">
+                  <div  class="col-sm-3"><label>Phone Number</label><span>:</span></div>
+                  <div class="col-sm-8"><input type="text" name="name" placeholder="Enter Mobile Number" formControlName="phone" class="form-control input-sm"  ></div>
+              </div>
+              <div  class="row cont-row field">
+                <div  class="col-sm-3"><label>Subject</label><span>:</span></div>
+                <div class="col-sm-8"><input type="text" name="name" placeholder="Enter Mobile Number" formControlName="subject" class="form-control input-sm"  ></div>
+            </div>
+               <div  class="row cont-row field">
+                  <div  class="col-sm-3"><label>Enter Message</label><span>:</span></div>
+                  <div class="col-sm-8">
+                    <textarea style="background-color:#fff" rows="5" placeholder="Enter Your Message" formControlName="message" class="form-control input-sm"></textarea>
+                  </div>
+              </div>
+              <div  class="row cont-row field">
+          
+                <div  class="col-sm-3"><label>Please enter the code below:</label></div>
+                <div class="col-sm-8"><input type="text" name="name" placeholder="Enter the code below" class="form-control input-sm"  ></div>
+            </div>
+               <div class="row field-button">
+                  <div class="col-sm-3"><label></label></div>
+                  <div class="col-sm-8">
+                   <button class="btn btn-primary btn-sm">Send Message</button>
+                  </div>
+              </div>
+            </form>
+          </div>
+           <div class="col-sm-5">    
+                <div class="serv"> 
+                  <div class="div-title">
+                    <h2>Address</h2>
+                </div>
+                  <p>V77C+F4W, l'aouina,2045,Tunis,Tunisia  </p>
+                  <p>Phone: +216 99 366 309</p>
+                  <p>Email: technical@dracoss.tech</p>
+
+             </div>    
+           </div>
+        </div>
+      </div>
+   </section>
+<!--- ############ Map ################## -->
+
+
+<div style="margin-top: 0px;" class="row no-margin">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3192.1120166027968!2d10.2703281!3d36.86373749999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd337f5e7ef543%3A0x8956365646ef7527!2sV77C%2BF4W%2C%20Tunis!5e0!3m2!1sfr!2stn!4v1696515545817!5m2!1sfr!2stn" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div>
+
+
+  <!--- ############ Footer Starts Here ################## -->
+ 
+
+
+
