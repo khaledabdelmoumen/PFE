@@ -132,7 +132,8 @@ export class CheckoutComponent implements OnInit {
 
   chargeCard(token: string) {
     const headers = new HttpHeaders({'token': token, 'amount': this.total.toString()});
-    this.http.post<any>('http://localhost:8081/payment/charge', {}, {headers: headers})
+    this.http.post<any>('http://localhost:8081/payment/charge', {}
+    , {headers: headers})
     .subscribe(
       response => {
         const message = response['message'];

@@ -65,7 +65,7 @@ const currencies = ['usd', 'euro', 'tnd'];
     
    let prix=document.getElementById('price');
    if (prix){
-   prix.innerHTML=(35*this.currency_rate).toString()+' '+this.currency_symbole;}
+   prix.innerHTML=Math.floor(40*this.currency_rate).toString()+' '+this.currency_symbole;}
   });
    })
 }

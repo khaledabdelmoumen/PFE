@@ -9,11 +9,14 @@ import { ObservedValuesFromArray } from 'rxjs';
   styleUrls: ['./tap-water-filter.component.css']
 })
 export class TapWaterFilterComponent implements OnInit {
+  numberofreviews:number=0;
+  reviews: any[]= [];
+  stars: number[] = [];
   quantity: number = 1;
   productName: string = 'The Dracoss Water Purifier Filter';
   productPrice: number = 35;
   productDescription: string = 'The Dracoss Water Tap Purifier is a revolutionary device designed to transform your regular tap water into clean, safe, and great-tasting water. Powered by an advanced filtration technology, it effectively reduces common contaminants like chlorine, heavy metals, bacteria, and sediments, while retaining beneficial minerals.';
-  
+  averageRating: number=0;
   currency_rate:number=1;
   currency_symbole:string='';
   buttonIncreaseClicked = false
@@ -48,10 +51,27 @@ export class TapWaterFilterComponent implements OnInit {
 
   
   ngOnInit(): void { 
+    this.http.get<any[]>('http://localhost:8081/feedback/getallfeedbacks').subscribe(res => {
+this.reviews=res;
+
+this.numberofreviews=this.reviews.length;
+
+
+    })
      //this.loadnewprice();
-   
+     this.getAverageRating();
   }
+  getAverageRating() {
+    // Fetch average rating from your backend
+    this.http.get<number>('http://localhost:8081/feedback/average').subscribe(res =>{this.averageRating = res
+    this.stars = Array(Math.floor(this.averageRating)).fill(1);
+    if (this.averageRating % 1 !== 0) {
+      this.stars.push(0.5);
+    }}  )
   
+    
+    
+  }
 /*async loadnewprice(){
  await fetch('https://api.ipdata.co?api-key=4c2784853ff1cbf16f867a26b9582961f5767a273ab025d38b9bb11d&fields=currency')
 .then( res => res.json())

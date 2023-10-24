@@ -1,3 +1,89 @@
+
+/* CSS for Reviews Section */
+.title_reviews{
+  padding-top: 65px;
+  font-family:'Nunito';
+  font-size: 25px;
+    text-align: center;
+    color: #000000;
+}
+.reviews_container {
+  padding-top:20px;
+  display: flex;
+  flex-wrap: wrap;
+ 
+  gap: 20px; /* Adjust the gap between reviews */
+}
+.addnew{
+  text-align: right;
+}
+.notes{
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+}
+.review {
+  width: calc(25% - 20px); /* Adjust the width and gap to get 3 reviews per row */
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left!important;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff; /* Optional background color */
+}
+
+.review img {
+  width: 100%; /* Adjust the image size */
+  height:220px;
+  text-align: center!important;
+  object-fit: cover; /* Ensure the image covers the container */
+  margin-bottom: 10px;
+}
+.titleofrev{
+  text-align: center;color:black;font-family: sans-serif;margin-top:30px;
+
+}
+.stars {
+  font-size: 24px;
+  color: gold;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.average-rating {
+  font-size: 19px;
+  margin-left: 10px;
+  color: black; /* Set the color to black */
+}
+
+.review .user-name {
+color: #000000;
+  font-weight: bold;
+  margin-bottom: 5px;
+  padding: 0 2px 0;
+  
+    font-size: 16px;
+    font-family: "Nunito", sans-serif;
+}
+
+.review .user-rating {
+  margin-bottom: 10px;
+}
+
+.review .user-description {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Add media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .review {
+      width: 100%;
+  }
+}
+
+
+
 .tab-title {
   font-family: sans-serif!important;
   color: #0e1b4dbf !important;

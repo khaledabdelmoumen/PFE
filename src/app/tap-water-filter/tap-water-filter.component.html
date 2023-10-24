@@ -4,19 +4,23 @@
 <section class="bg-white">
   <div class="container-lg">
 
+
+
     <!-- product-details.component.html -->
 
 
     <div class="container">
       <div class="product-images-container col-lg-10">
         <div class="product-images-list">
-          <img class="imglist"*ngFor="let image of imageList; let i = index" [src]="image" (click)="updateSelectedImage(i)">
+          <img class="imglist" *ngFor="let image of imageList; let i = index" [src]="image"
+            (click)="updateSelectedImage(i)">
           <!-- Ajoutez plus d'images si nécessaire -->
         </div>
 
         <div class="product-image">
-          <img class="imgp" [src]="selectedImage" class="zoom" alt="Selected Product Image " [ngClass]="{'zoomed': isImageZoomed}"
-            (mousedown)="startDrag($event)" (mousemove)="doDrag($event)" (mouseup)="endDrag()">
+          <img class="imgp" [src]="selectedImage" class="zoom" alt="Selected Product Image "
+            [ngClass]="{'zoomed': isImageZoomed}" (mousedown)="startDrag($event)" (mousemove)="doDrag($event)"
+            (mouseup)="endDrag()">
         </div>
 
       </div>
@@ -32,16 +36,16 @@
 
         <div class="product-rating">
           <i class="fa fa-star"
-            [ngClass]="{'filled': rating >= 1, 'fas fa-star-half-alt': rating >= 0.5 && rating < 1, 'not-filled': rating < 0.5}"></i>
+            [ngClass]="{'filled': averageRating >= 1, 'fas fa-star-half-alt': averageRating >= 0.5 && averageRating < 1, 'not-filled': averageRating < 0.5}"></i>
           <i class="fa fa-star"
-            [ngClass]="{'filled': rating >= 2, 'fas fa-star-half-alt': rating >= 1.5 && rating < 2, 'not-filled': rating < 1.5}"></i>
+            [ngClass]="{'filled': averageRating >= 2, 'fas fa-star-half-alt': averageRating >= 1.5 && averageRating < 2, 'not-filled': averageRating < 1.5}"></i>
           <i class="fa fa-star"
-            [ngClass]="{'filled': rating >= 3, 'fas fa-star-half-alt': rating >= 2.5 && rating < 3, 'not-filled': rating < 2.5}"></i>
+            [ngClass]="{'filled': averageRating >= 3, 'fas fa-star-half-alt': averageRating >= 2.5 && averageRating < 3, 'not-filled': averageRating < 2.5}"></i>
           <i class="fa fa-star"
-            [ngClass]="{'filled': rating >= 4, 'fas fa-star-half-alt': rating >= 3.5 && rating < 4, 'not-filled': rating < 3.5}"></i>
+            [ngClass]="{'filled': averageRating >= 4, 'fas fa-star-half-alt': averageRating >= 3.5 && averageRating < 4, 'not-filled': averageRating < 3.5}"></i>
           <i class="fa fa-star"
-            [ngClass]="{'filled': rating >= 5, 'fas fa-star-half-alt': rating >= 4.5 && rating < 5, 'not-filled': rating < 4.5}"></i>
-          <span class="rating-text">{{ rating }}</span>
+            [ngClass]="{'filled': averageRating >= 5, 'fas fa-star-half-alt': averageRating >= 4.5 && averageRating < 5, 'not-filled': averageRating < 4.5}"></i>
+          <span class="rating-text">{{ this.averageRating }}</span>
         </div>
 
 
@@ -155,7 +159,7 @@
               <br>
               <b>1 .Economic Impact:</b>
               <br>
-              
+
               <b>&#x2022; Cost Savings: </b> Dracoss Filters eliminate the need for purchasing bottled water, resulting
               in significant cost savings for households and businesses.
 
@@ -166,9 +170,9 @@
               <b>&#x2022; Boosting Small Businesses: </b>Restaurants, cafes, and small businesses that use Dracoss
               Filters can attract more customers who value clean water, potentially increasing their revenue.
               <br>
-              
+
               <b>
-                
+
                 2. Environmental Impact:
               </b>
               <br>
@@ -360,6 +364,40 @@
 
 
     </div>
+<div class="titleofrev">
+  <h2>What Our Customers Have to Say!</h2>
+</div>
+    <div class="stars">
+      <span *ngFor="let star of stars">&#9733;</span> <!-- Star character (★) -->
+      <span class="average-rating">{{numberofreviews}} Reviews</span>
+  </div>
+  
+
+    <div class="reviews_container">
+      <!-- Individual Review -->
+      <div *ngFor="let review of reviews" class="review">
+          <div class="review-info">
+              <div class="review-img">
+                  <img src="assets/images/img1.jpg" alt="User Image">
+              </div>
+              <div class="user-name">
+Khaled
+              </div>
+              <div class="review-description">
+                  <h3>Review Title</h3>
+                  <p>Review Description goes here...</p>
+              </div>
+          </div>
+          <div class="review-rating">
+              <!-- Add rating stars here -->
+          </div>
+      </div>
+      <!-- Add more reviews as needed -->
+
+     
+
+  </div>
+
 
   </div>
 </section>
