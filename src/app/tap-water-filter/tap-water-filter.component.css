@@ -1,5 +1,43 @@
 
+
+.star-rating {
+  font-size: 30px;
+}
+
+.star {
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.fa {
+  cursor: pointer;
+}
+
+.fa-star {
+  color: gold;
+}
+
+.fa-star-o {
+  color: #ccc;
+  transition: color 0.2s;
+}
 /* CSS for Reviews Section */
+.svgs{
+margin-bottom: 4px;;
+  margin-left: 7px;;
+}
+.dropdown_rating{
+  background-color: white;
+  z-index: 1;
+ position: absolute;
+  width: 403px;
+  padding: 20px 20px 24px 20px;
+ 
+  transform-origin: top center;
+  box-shadow: 0px 6px 14px -4px rgba(0,0,0,0.14);
+
+
+}
 .title_reviews{
   padding-top: 65px;
   font-family:'Nunito';
@@ -8,7 +46,7 @@
     color: #000000;
 }
 .reviews_container {
-  padding-top:20px;
+  padding-top:5px;
   display: flex;
   flex-wrap: wrap;
  
@@ -42,7 +80,72 @@
   text-align: center;color:black;font-family: sans-serif;margin-top:30px;
 
 }
+.last_td{
+  margin-left: 7px;
+}
+.progress-container {
+ 
+  width: 234px;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+}
+
+.progress-bar {
+  font-size: 10px;
+
+  height: 11px;
+  text-align: center;
+  line-height: 30px;
+  color: rgb(255, 255, 255);
+  background-color: #5a5a5a;
+}
+.btnback{
+  font-family: inherit; 
+  border:0;
+}
+.btnaddreview{
+  padding: 6px 12px;
+  font-size: 16px;
+    border: 1px solid #E8E8E8;
+    border-radius: 4px;
+    height: 40px !important;
+    cursor: pointer;
+    color: #000000;
+    background: transparent;
+    border-color: #ccc;
+    font-family: "Poppins", sans-serif;
+  float:right;
+  margin-top:34px;
+  margin-right: 22px;
+}
+.rowreview{
+  align-items: center;
+}
+.average{
+  font-size: 32px;
+
+  text-align: center;
+  
+}
+.date_rev{
+  color: #767676;
+    font-size: 11px;
+
+    height: 20px;
+}
+.starsone{
+  font-size: 42px;
+  color: gold;
+}
+.starsc {
+  
+  font-size: 24px;
+  color: gold;
+
+}
 .stars {
+  cursor: pointer;
+  margin-top:30px;
   font-size: 24px;
   color: gold;
   margin-bottom: 5px;
@@ -75,14 +178,25 @@ color: #000000;
   color: #666;
 }
 
+
 /* Add media query for smaller screens */
 @media screen and (max-width: 768px) {
+ .btnaddreview{
+  font-size: 14px;
+ }
   .review {
       width: 100%;
   }
+  .average-rating{
+    font-size: 12px;
+  }
 }
+@media screen and (min-width: 768px) {
 
-
+.modal-content{
+  height: 516px!important;;
+  width: 600px!important;
+}}
 
 .tab-title {
   font-family: sans-serif!important;

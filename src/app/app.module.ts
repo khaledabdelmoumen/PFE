@@ -24,7 +24,6 @@ import { TermsOfServiceComponent } from './policies/terms-of-service/terms-of-se
 import { HttpClientModule } from '@angular/common/http';
 import { InstallationGuideComponent } from './installation-guide/installation-guide.component';
 import { TestComponent } from './test/test.component';
-
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { PaymentFormComponent } from './payment-form/payment-form.component';
 
@@ -51,10 +50,8 @@ import { PaymentFormComponent } from './payment-form/payment-form.component';
     TermsOfServiceComponent,
     InstallationGuideComponent,
     TestComponent,
-
     ConfirmationComponent,
      PaymentFormComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -62,6 +59,7 @@ import { PaymentFormComponent } from './payment-form/payment-form.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    
    
   
   ],

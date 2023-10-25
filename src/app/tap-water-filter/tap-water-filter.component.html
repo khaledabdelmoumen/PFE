@@ -364,41 +364,157 @@
 
 
     </div>
-<div class="titleofrev">
-  <h2>What Our Customers Have to Say!</h2>
-</div>
-    <div class="stars">
+    <div class="titleofrev">
+      <h2><b>What Our Customers Have to Say!</b></h2>
+    </div>
+    <div class="row rowreview">
+    <div class="stars col" (click)="showDropdown()">
       <span *ngFor="let star of stars">&#9733;</span> <!-- Star character (★) -->
       <span class="average-rating">{{numberofreviews}} Reviews</span>
+<div class="svgs">
+      <svg *ngIf="showDropdownFlag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10"><path fill="black" d="M12 2L0 22h24L12 2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+      <svg *ngIf="!showDropdownFlag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10"><path fill="black" d="M12 22L24 2H0l12 20z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+    </div>
+
+   
+    </div>
+
+   <div class="col">
+    <button type="button"  class="btnaddreview"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Write a review
+    </button></div>
   </div>
-  
+    <div class="dropdown_rating" *ngIf="showDropdownFlag" > 
+      <div class="average">
+          <span class="starsone"> &#9733;</span>
+          <span style="margin-left: 5px;"><strong>{{ averageRating }}</strong></span>
+      </div>
+      <table class="rating-count-table">
+          <tr>
+              <td><span class="starsc"*ngFor="let _ of [].constructor(5); let i = index">&#9733;</span></td>
+              <td> <div class="progress-container">
+                <div class="progress-bar" [style.width.%]="getPercentage(0)">
+                  {{ getPercentage(0) }}%
+                </div>
+              </div></td>
+              <td class="last_td">( {{ starRatings[0].count || 0 }} )</td>
+          </tr>
+          <tr>
+              <td><span class="starsc"*ngFor="let _ of [].constructor(4); let i = index">&#9733;</span></td>
+              <td> <div class="progress-container">
+                <div class="progress-bar" [style.width.%]="getPercentage(1)">
+                  {{ getPercentage(1) }}%
+                </div>
+              </div></td>
+              <td class="last_td">( {{ starRatings[1].count || 0 }} )</td>
+          </tr>
+          <tr>
+            <td><span class="starsc"*ngFor="let _ of [].constructor(3); let i = index">&#9733;</span></td>
+            <td> <div class="progress-container">
+              <div class="progress-bar" [style.width.%]="getPercentage(2)">
+                {{ getPercentage(2) }}%
+              </div>
+            </div></td>
+              <td class="last_td">( {{ starRatings[2].count || 0 }} )</td>
+          </tr>
+          <tr>
+            <td><span class="starsc"*ngFor="let _ of [].constructor(2); let i = index">&#9733;</span></td>
+            <td> <div class="progress-container">
+              <div class="progress-bar" [style.width.%]="getPercentage(3)">
+                {{ getPercentage(3) }}%
+              </div>
+            </div></td>
+              <td class="last_td"> ( {{ starRatings[3].count || 0 }} )</td>
+          </tr>
+          <tr>
+            <td><span class="starsc"*ngFor="let _ of [].constructor(1); let i = index">&#9733;</span></td>
+            <td> <div class="progress-container">
+              <div class="progress-bar" [style.width.%]="getPercentage(4)">
+                {{ getPercentage(4) }}%
+              </div>
+            </div></td>
+              <td class="last_td" >( {{ starRatings[4].count || 0 }} )</td>
+          </tr>
+      </table>
+  </div>
+   
 
     <div class="reviews_container">
       <!-- Individual Review -->
       <div *ngFor="let review of reviews" class="review">
-          <div class="review-info">
-              <div class="review-img">
-                  <img src="assets/images/img1.jpg" alt="User Image">
-              </div>
-              <div class="user-name">
-Khaled
-              </div>
-              <div class="review-description">
-                  <h3>Review Title</h3>
-                  <p>Review Description goes here...</p>
-              </div>
+        <div class="review-info">
+          <div class="review-img">
+            <img src="assets/images/img1.jpg" alt="User Image">
           </div>
-          <div class="review-rating">
-              <!-- Add rating stars here -->
+         
+          <div class="review-description">
+             <div class="user-name">
+              {{review.name}}  <i aria-label="Verified purchase" role="img" style="margin:0px 4px; height:15px" class="fa fa-check-circle"></i> 
+             </div>
+             <div class="date_rev">{{ review.createdDate }}</div>
+            <p>{{ review.description}}</p>
           </div>
+        </div>
+        <div class="review-rating">
+          <!-- Add rating stars here -->
+        </div>
       </div>
       <!-- Add more reviews as needed -->
 
-     
 
+
+    </div>
+<!-- modalllll here -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" styl>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 " id="exampleModalLabel">Provide further information</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!--modal body -->
+
+        <div *ngIf="currentStep === 1">
+         
+          <div class="star-rating">
+            <div class="star" *ngFor="let star of starsArray(maxStars).fill(0); let i = index">
+              <i class="fa" [ngClass]="{'fa-star': i < currentRating, 'fa-star-o': i >= currentRating}"
+                 (click)="setRating(i + 1)"></i>
+            </div>
+          </div>
+
+
+        </div>
+        
+        <div *ngIf="currentStep === 2">
+        aaaaaaaaa
+        </div>
+        
+        <div *ngIf="currentStep === 3">
+         azzzzzzzzzzzzzzzzzzz
+        </div>
+        
+        <div *ngIf="currentStep === 4">
+      bbbbbbbbbrrrrrrrrrrrrrrr
+        </div>
+        
+                    
+
+
+      </div>
+      <div class="modal-footer">
+        
+        <div class="navigation-buttons" *ngIf="currentStep != 1">
+          <button (click)="previousStep()" class="backbtn">Back</button>
+          <button (click)="nextStep()" class="nextbtn">Next</button>
+        </div>
+        
+        <button *ngIf="currentStep === 4" (click)="submitReview()">Submit</button>
+      </div>
+    </div>
   </div>
-
-
+</div>
   </div>
 </section>
 
