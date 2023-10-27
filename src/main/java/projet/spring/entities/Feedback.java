@@ -1,6 +1,7 @@
 package projet.spring.entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
@@ -12,16 +13,30 @@ import jakarta.persistence.OneToOne;
 
 @Entity 
 public class Feedback implements Serializable{
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
 	private long id_feedback;
 	private String description;
-	private Date createdDate;
+	private Timestamp createdDate;
 	private int note;
 	private String img;
 	
-	 public int getNote() {
+	private String name;
+	private String email;
+	 public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public int getNote() {
 		return note;
 	}
 	public void setNote(int note) {
@@ -59,7 +74,7 @@ public class Feedback implements Serializable{
 	public Date getCreatedDate() {
 		return createdDate;
 	}
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(Timestamp createdDate) {
 		this.createdDate = createdDate;
 	}
 	@Override
@@ -67,7 +82,7 @@ public class Feedback implements Serializable{
 		return "Feedback [id_feedback=" + id_feedback + ", description=" + description + ", createdDate=" + createdDate
 				+ "]";
 	}
-	public Feedback(String description, Date createdDate) {
+	public Feedback(String description, Timestamp createdDate) {
 		super();
 		this.description = description;
 		this.createdDate = createdDate;

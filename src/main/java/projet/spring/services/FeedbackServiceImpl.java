@@ -1,5 +1,7 @@
 package projet.spring.services;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ public class FeedbackServiceImpl implements FeedbackService{
 	
 	@Override
 	public Feedback AjouterFeedback(Feedback f) {
+		 LocalDateTime localDateTime = LocalDateTime.now();
+		   f.setCreatedDate(Timestamp.valueOf(localDateTime));  
 		feedbackRep.save(f);
 		return f;
 	}
