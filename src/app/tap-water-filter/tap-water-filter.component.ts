@@ -2,6 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ObservedValuesFromArray } from 'rxjs';
+import { ProductserviceService } from '../service/productservice.service';
 
 @Component({
   selector: 'app-tap-water-filter',
@@ -10,7 +11,14 @@ import { ObservedValuesFromArray } from 'rxjs';
   
 })
 export class TapWaterFilterComponent implements OnInit {
+  name="khaled"
+  firstname="abdelmoumen"
+  reviewtxt="aaaaaaaa"
+  email="aaaaaaa"
+imgpath:any;
 
+
+  ProductRating:any = 0;
   currentStep = 1;
   reviewData = {
     stars: null,
@@ -19,7 +27,7 @@ export class TapWaterFilterComponent implements OnInit {
     name: '',
     email: ''
   };
-
+  itemsArray:any = [] ; 
   maxStars = 5;
   currentRating = 0;
   starsArray = Array;
@@ -61,8 +69,49 @@ export class TapWaterFilterComponent implements OnInit {
   isImageZoomed: boolean = false;
   zoomStartPosition: { x: number; y: number } = { x: 0, y: 0 };
   dragStartPosition: { x: number; y: number } = { x: 0, y: 0 };
+  shouldDelayTransition: boolean = false;
+  
+  constructor(private router: Router, private http: HttpClient,private Productservice:ProductserviceService) {}
+  uploadImage(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
 
-  constructor(private router: Router, private http: HttpClient) {}
+    if (inputElement && inputElement.files && inputElement.files[0]) {
+   
+      const file = inputElement.files[0];
+      const formData = new FormData();
+      const encodedFileName = file.name.replace(/ /g, '_');
+      formData.append('file', file, encodedFileName);
+  
+    this.http.post<any>('http://localhost:8081/feedback/upload', formData).subscribe(response => {
+       // Assuming the response contains the path to the uploaded image
+      const imagePath:any = response;
+  this.imgpath=response.filePath;
+  console.log(response.filePath);    
+      // Now you can send the review data including the image path to your backend
+    });
+  }
+  }
+  setrating(x:any){
+    this.ProductRating=x;
+  
+
+  }
+
+ 
+  nextStep() {
+    if (this.currentStep < 4) {
+      if (this.shouldDelayTransition) {
+        setTimeout(() => {
+          this.currentStep++;
+        }, 1000); // Adjust the delay time (in milliseconds) as needed
+      } else {
+        this.currentStep++;
+      }
+    }
+  }
+  
+  // Add a click event handler for the star element
+  
   divStyle = {
     display: 'none'
   };
@@ -81,15 +130,23 @@ export class TapWaterFilterComponent implements OnInit {
       });
   
     this.getAverageRating();
-  }
 
 
+    const item = localStorage.getItem('itemName');
 
-  nextStep() {
-    if (this.currentStep < 4) {
-      this.currentStep++;
+    if (item !== null) {
+      const item: string = localStorage.getItem('price')!;
+      let prix=document.getElementById('price');
+      if (prix){
+      prix.innerHTML=Math.floor(40*this.currency_rate).toString()+' '+this.currency_symbole;}
+
+    } else {
+      console.log('Item not found');
     }
   }
+
+
+
 
   previousStep() {
     if (this.currentStep > 1) {
@@ -98,7 +155,9 @@ export class TapWaterFilterComponent implements OnInit {
   }
 
   submitReview() {
-    // Handle review submission logic
+  this.Productservice.addreview(this.name,this.firstname,this.reviewtxt,this.imgpath,this.ProductRating);
+  alert("review added succesfully")
+  window.location.reload();
   }
 
 
@@ -136,6 +195,8 @@ export class TapWaterFilterComponent implements OnInit {
       .get<number>('http://localhost:8081/feedback/average')
       .subscribe((res) => {
         this.averageRating = res;
+        
+      
         this.stars = Array(Math.floor(this.averageRating)).fill(1);
         if (this.averageRating % 1 !== 0) {
           this.stars.push(0.5);

@@ -31,15 +31,13 @@ export class HeaderComponent implements OnInit {
    .then(response => {
      var  currency_symbol= response.currency.code;
       // console.log("Country: ", currency_symbol);
-       this.currency_symbole=currency_symbol
+       this.currency_symbole=currency_symbol;
        localStorage.setItem('symbol',this.currency_symbole.toString());
-       
-       
     });
     
-    const selectElement : any  = document.getElementById('currency');
-    selectElement.value =  this.currency_symbole;
-const currencies = ['usd', 'euro', 'tnd'];
+      const selectElement : any  = document.getElementById('currency');
+      selectElement.value =  this.currency_symbole;
+      const currencies = ['usd', 'euro', 'tnd'];
 
     if (currencies.includes(this.currency_symbole.toLowerCase())) {
       selectElement.value =  this.currency_symbole;
@@ -68,8 +66,8 @@ const currencies = ['usd', 'euro', 'tnd'];
    prix.innerHTML=Math.floor(40*this.currency_rate).toString()+' '+this.currency_symbole;}
   });
    })
+   localStorage.setItem('price',(40*this.currency_rate).toString())
 }
-
 
  updateCurrencySymbol() {
   const selectElement:any = document.getElementById('currency');

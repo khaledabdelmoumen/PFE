@@ -42,8 +42,6 @@ export class CheckoutComponent implements OnInit {
 
   
   ngOnInit() {
- 
-   
     this.route.queryParams.subscribe(params => {
       this.productName = params['productName'];
       this.productPrice = params['productPrice'];
